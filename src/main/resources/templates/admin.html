@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Administration - Pharmacie</title>
+<style>
+ body{font-family:Arial,sans-serif;max-width:900px;margin:30px auto;padding:0 15px;color:#222}
+ table{border-collapse:collapse;width:100%;margin:15px 0}
+ th,td{border:1px solid #ccc;padding:8px;text-align:left}
+ th{background:#198754;color:#fff}
+ .ok{background:#d1e7dd;padding:8px;margin:10px 0}
+ .ko{background:#f8d7da;padding:8px;margin:10px 0}
+ input,select,button{padding:6px;margin:2px}
+ button{background:#198754;color:#fff;border:0;cursor:pointer}
+ button.danger{background:#dc3545}
+ nav a{margin-right:12px}
+</style></head>
+<body>
+<h1>Administration des utilisateurs</h1>
+<nav><a th:href="@{/home}">Accueil</a><a th:href="@{/medicaments}">Medicaments</a></nav>
+
+<div class="ok" th:if="${success}" th:text="${success}"></div>
+<div class="ko" th:if="${error}" th:text="${error}"></div>
+
+<table>
+    <tr><th>ID</th><th>Utilisateur</th><th>Roles</th><th>Actions</th></tr>
+    <tr th:each="u : ${users}">
+        <td th:text="${u.id}"></td>
+        <td th:text="${u.username}"></td>
+        <td><span th:each="r : ${u.roles}" th:text="${r.name} + ' '"></span></td>
+        <td>
+            <form th:action="@{/admin/users/supprimer/{id}(id=${u.id})}" method="post">
+                <button type="submit" class="danger">Supprimer</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<h3>Ajouter un utilisateur</h3>
+<form th:action="@{/admin/users}" method="post">
+    <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+    <input type="password" name="password" placeholder="Mot de passe" required>
+    <select name="role">
+        <option th:each="r : ${roles}" th:value="${r.name}" th:text="${r.name}"></option>
+    </select>
+    <button type="submit">Creer</button>
+</form>
+</body>
+</html>

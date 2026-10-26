@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Acces refuse</title>
+<style>
+ body{font-family:Arial,sans-serif;max-width:900px;margin:30px auto;padding:0 15px;color:#222}
+ table{border-collapse:collapse;width:100%;margin:15px 0}
+ th,td{border:1px solid #ccc;padding:8px;text-align:left}
+ th{background:#198754;color:#fff}
+ .ok{background:#d1e7dd;padding:8px;margin:10px 0}
+ .ko{background:#f8d7da;padding:8px;margin:10px 0}
+ input,select,button{padding:6px;margin:2px}
+ button{background:#198754;color:#fff;border:0;cursor:pointer}
+ button.danger{background:#dc3545}
+ nav a{margin-right:12px}
+</style></head>
+<body>
+<h1>403 - Acces refuse</h1>
+<div class="ko">Vous n'avez pas les droits necessaires pour acceder a cette page.</div>
+<a th:href="@{/home}">Retour a l'accueil</a>
+</body>
+</html>
